@@ -1,1 +1,62 @@
-<h1>Hello World!</h1>
+
+<main>
+<h1 class="green-text">Hello World!</h1>
+
+<div class="flags">
+<!-- <span class="fi fi-{{ currentCountry.code}} thumbnail"></span> -->
+<span class="fi fi-{{ guessCountries[currentIndex].code}} thumbnail"></span>
+<div class="input-field">
+    <input 
+        placeholder="Type Here" 
+        type="text"
+        (keyup)="keyUp($event)"
+        />
+    <!--Hide the dropdown select list-->
+    <!--on a select / click event, -->
+    <!-- @if(showAutoComplete) {
+        <select class="dropdown">
+            @for(country of countries; track $index) {
+                <option (click)="selectCountry($index)" class="dropdown-item">{{ country.name }}</option>
+            }
+    </select>
+    } -->
+<!--EXPANDOOOOOOOOOOOOOOOOOOOOOOOOOOO @if (showAutoComplete) {
+		  <ul class="dropdown">
+		    @for (country of countries; track $index) {
+		      <li class="dropdown-item" (click)="selectCountry($index)">
+		        {{ country.name }}
+		      </li>
+		    }
+		  </ul>
+		} -->
+  @if (showAutoComplete) {
+  <ul class="dropdown">
+    @for (country of countries; track $index; let i = $index) {
+      <li
+        class="dropdown-item"
+        [class.selected]="i === selectedIndex"
+        (click)="selectCountry(i)"
+      >
+        {{ country.name }}
+      </li>
+    }
+  </ul>
+}  
+</div>
+
+
+    
+
+    
+
+<button>Click</button>
+<div>
+
+</div>
+ 
+</div>
+
+<!-- <span class="fi fi-fr thumbnail"></span>
+<span class="fi fi-us thumbnail"></span> -->
+{{ guessCountries | json }}
+</main>

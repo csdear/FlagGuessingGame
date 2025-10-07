@@ -1,0 +1,136 @@
+.green-text {
+  color: green;
+  // font-weight: 100;
+}
+
+.red-text {
+  color: red;
+  // font-weight: 100;
+}
+
+// .fi {
+//     height: 150px;
+//     width: 150px;
+// }
+
+// _thumbnail.scss (initially ai generated)
+
+.flags {
+  padding-top: 5rem;
+  background-color: lightblue;
+  display: flex;              // enable flexbox
+  justify-content: center;    // horizontal centering
+  align-items: center;        // vertical centering
+  height: 300px;              // give it some height so vertical centering works
+  flex-direction: column;
+
+}
+
+// _inputs.scss
+
+.input-field {
+  display: inline-block;   // keeps it tight to content (can be block if you want full width)
+}
+
+.input-field input[type="text"] {
+  width: 220px;                     // fixed width (or use 100% if you want it fluid)
+  padding: 10px 14px;               // inner spacing
+  border: 2px solid #ddd;           // subtle border
+  border-radius: 6px;               // rounded corners
+  font-size: 1rem;                  // readable font size
+  color: #333;                      // text color
+  background-color: #fff;           // white background
+  outline: none;                    // remove default outline
+  transition: border-color 0.25s, box-shadow 0.25s;
+
+  &::placeholder {
+    color: #aaa;                    // lighter placeholder
+    font-style: italic;
+  }
+
+  &:focus {
+    border-color: #4f8ef7;          // highlight border on focus
+    box-shadow: 0 0 5px rgba(79, 142, 247, 0.4);
+  }
+
+  &:hover {
+    border-color: #bbb;             // subtle hover effect
+  }
+}
+
+.thumbnail {
+  display: inline-block;       // allow width/height
+  width: 20rem;                 // set your thumbnail width
+  height: 20rem;                // set your thumbnail height
+  border: 2px solid white;     // small white border
+  border-radius: 8px;          // rounded corners
+  background-color: #333;      // fallback background
+  color: white;                // icon/text color
+  text-align: center;
+  line-height: 56px;           // vertically center icon (height - border*2)
+  font-size: 1.5rem;           // adjust icon size
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); // subtle shadow
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(2.1);       // slight zoom on hover
+    background-color: #444;      // subtle background change
+  }
+}
+
+.dropdown {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 200px;
+  background-color: white;
+  position: absolute;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover,
+.dropdown-item.selected {
+  background-color: #007bff;
+  color: white;
+}
+// _buttons.scss
+
+button {
+  display: inline-block;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4f8ef7;        // primary blue
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+
+  &:hover {
+    background-color: #3d7ce0;      // darker on hover
+  }
+
+  &:active {
+    transform: scale(0.97);         // subtle press-down effect
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(79, 142, 247, 0.4); // accessibility-friendly focus ring
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }
+}
