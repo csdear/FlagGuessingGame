@@ -28,24 +28,31 @@ export class AppComponent {
     
     // If set size is less than 10, get random indexes.. the list of 10 "guess" countries? 
     while (countryIndexes.size < 10) {
-      countryIndexes.add(this.getRandIndex(this.countries.length));
+      countryIndexes.add(this.getRandIndex(COUNTRIES.length));
     }
 
     // to list, list of unique indices
-    const uniqueIndexes = Array.from(countryIndexes);
+    // const uniqueIndexes = Array.from(countryIndexes);
     //1 this.currentCountry = this.countries[uniqueIndexes[0]];
 
     // 5
     for (const i of countryIndexes) {
-      this.guessCountries.push(this.countries[i]);
+      this.guessCountries.push(COUNTRIES[i]);
     }
   }
   
   selectedIndex: number | null = null;
-  
-  //7 selectCountry
-  selectCountry(i: number) {
-    console.log(i);
+
+  //7 selectCountry - by index
+  // selectCountry(i: number) {
+    // console.log(i);
+    // console.log(`hit selectCountry`);
+    // console.log(`selected country index value ${i})`); // log index for now.
+  // }
+
+  //8 selectCountry - by country code 
+  selectCountry(code: string) {
+    console.log(code);
     // console.log(`hit selectCountry`);
     // console.log(`selected country index value ${i})`); // log index for now.
   }
@@ -55,7 +62,13 @@ export class AppComponent {
     console.log('Hit Keyup');
     this.showAutoComplete = true;
     console.log(keyUp);
-    console.log(keyUp.target.value);
+    
+    const val = keyUp.target.value;
+    console.log("Val:", keyUp.target.value); // key in "z" to the input field and console logs out val as z.  
+    //9 "includes" the value. Text getting predictive now. Mon --> Mongolia.  
+    this.countries = COUNTRIES.filter((c) => 
+      c.name.toLowerCase().includes(val.toLowerCase())
+     );
   }
 
   //Pick a random country. Of type Country. Return a Country.  Many countries. 300. Wowza.
