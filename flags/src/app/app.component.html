@@ -1,15 +1,24 @@
 
 <main>
-<h1 class="green-text">Hello World!</h1>
+<!--If the gamestate is finished, hide this counter-->
+@if(gameState === 'start') {
+<h1 class="green-text">
+    Guess Counter: {{ guessCounter }}
+</h1>
+
+
 
 <div class="flags">
 <!-- <span class="fi fi-{{ currentCountry.code}} thumbnail"></span> -->
+
 <span class="fi fi-{{ guessCountries[currentIndex].code}} thumbnail"></span>
+{{ guessCountries[currentIndex] | json }}
 <div class="input-field">
     <input 
         placeholder="Type Here" 
         type="text"
         (keyup)="keyUp($event)"
+        [value]="currentName"
         />
     <!--Hide the dropdown select list-->
     <!--on a select / click event, -->
@@ -63,15 +72,31 @@
 
     
 
-<button>Click</button>
-<div>
+<button class="btn" (click)="guess()" >Guess</button>
 
-</div>
+
  
-</div>
+</div> <!--end flags-->
+
+
+  @if(message){
+    <div class="error-msg">
+    {{ message }}
+    </div>
+  } }
+  
+  @if(gameState === 'finished'){
+    <div class="finish-msg">
+    <h2>Game Over! Your score {{guessCounter}}</h2>
+    </div>
+  }
+
 
 <!-- <span class="fi fi-fr thumbnail"></span>
 <span class="fi fi-us thumbnail"></span> -->
+<span style="color: orange;">CURRENT FLAG CHEAT: {{ this.guessCountries[this.currentIndex].name | json }}</span>
+<br />
+<br />
 <span style="color: blue;">GUESSCOUNTRIES: {{ guessCountries | json }}</span>
 <br />
 <br />
