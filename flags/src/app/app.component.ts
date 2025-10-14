@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { COUNTRIES, Country } from './data/countryCodes';
 import { JsonPipe } from '@angular/common';
 
-const SIZE = 10;
+const SIZE = 3;
 
 @Component({
   selector: 'app-root',
@@ -31,7 +31,7 @@ export class AppComponent {
     const countryIndexes = new Set<number>(); // 32:21
     
     // If set size is less than 10, get random indexes.. the list of 10 "guess" countries? 
-    while (countryIndexes.size < 10) {
+    while (countryIndexes.size < 3) {
       countryIndexes.add(this.getRandIndex(COUNTRIES.length));
     }
 
@@ -71,9 +71,9 @@ export class AppComponent {
 
   //6 keyup 10 when there is a value
   keyUp(keyUp: any) {
-    console.log('Hit Keyup');
+    // console.log('Hit Keyup');
     this.showAutoComplete = true;
-    console.log(keyUp);
+    // console.log(keyUp);
     
     // const val = keyUp.target.value;
     this.currentName = keyUp.target.value;
@@ -91,38 +91,41 @@ export class AppComponent {
   }
 
    guess() {
-    this.message = ''; //12 reset message to empty 
-    const guessedCountry = COUNTRIES.find(c => c.name === this.currentName);
-    if (!guessedCountry) {
-      this.message = "You have to select from the listed countries";
-      return;
-    }
-    console.log('Cheater!! Current Flag', this.guessCountries[this.currentIndex].name);
-    console.log('the guessed country', guessedCountry);
+  console.log('guess() CurrentIndex', this.currentIndex); 
+  this.message = ''; // reset message
 
-    //15 if its wrong guess again 
-    if (guessedCountry.code.toLocaleLowerCase() !== this.guessCountries[this.currentIndex].code) {
-          this.message = "Guess again!";
-          this.guessCounter++;
-          return;
-    }
+  const guessedCountry = COUNTRIES.find(c => c.name === this.currentName);
 
-    this.currentIndex++; //increase the current index (why?)
-    
-    //16
-    this.countries =  COUNTRIES.map(c => ({...c, code: c.code.toLocaleLowerCase(),}));
-    
-    this.currentName = "";
-
-
-    // equal to SIZE, our limit. the game is finished. 
-    if (this.currentIndex === SIZE) {
-        this.gameState === "finished"; //kinda like state management.
-    }
-
-    //14 currentIndex is the current country we are guessing. we guessed correctly. He deleted this. 
-    // if (guessedCountry.code === this.guessCountries[this.currentIndex].code) {}
+  if (!guessedCountry) {
+    this.message = "You have to select from the listed countries";
+    return;
   }
+
+  // increment guess counter for every attempt
+  this.guessCounter++;
+
+  // wrong guess
+  if (guessedCountry.code.toLowerCase() !== this.guessCountries[this.currentIndex].code) {
+    this.message = "Guess again!";
+    return;
+  }
+
+  // correct guess
+  this.message = "Correct!";
+
+  // move to next flag
+  this.currentIndex++;
+
+  // reset countries list for autocomplete
+  this.countries = COUNTRIES.map(c => ({ ...c, code: c.code.toLowerCase() }));
+  this.currentName = "";
+
+  // finished after 3 correct guesses
+  if (this.currentIndex === SIZE) {
+    console.log('HIT GAMESTATE');
+    this.gameState = "finished"; // ✅ assignment
+  }
+}
 
   //Pick a random country. Of type Country. Return a Country.  Many countries. 300. Wowza.
   // 4
