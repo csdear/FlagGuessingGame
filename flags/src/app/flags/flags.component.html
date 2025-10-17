@@ -1,0 +1,57 @@
+<main>
+
+  @if(gameState === 'start' && guessCountries && guessCountries.length > 0 && currentIndex < guessCountries.length) {
+
+    <h1 class="green-text">Guess Counter: {{ guessCounter }}</h1>
+
+    <div class="flags">
+      <span class="fi fi-{{ guessCountries[currentIndex]?.code || '' }} thumbnail"></span>
+      {{ guessCountries[currentIndex]?.name }}
+
+      <div class="input-field">
+        <input
+          type="text"
+          placeholder="Type Here"
+          [value]="currentName"
+          (keyup)="keyUp($event)"
+        />
+
+        @if(showAutoComplete && countries && countries.length > 0) {  
+          <ul class="dropdown">
+            @for(country of countries; track $index; let i = $index) {
+              <li
+                class="dropdown-item"
+                [class.selected]="i === selectedIndex"
+                (click)="selectCountry(country.code)"
+              >
+                {{ country.name }}
+              </li>
+            }
+          </ul>
+        }
+      </div>
+
+      <button class="btn" (click)="guess()">Guess</button>
+    </div>
+
+    @if(message) {
+      <div class="error-msg">
+        {{ message }}
+      </div>
+    }
+
+  }
+
+  @if(gameState === 'finished') {
+    <div class="finish-msg">
+      <h2>Game Over! You win! Your total guesses: {{ guessCounter }}</h2>
+    </div>
+  }
+
+  <div style="margin-top: 20px; font-size: 0.85rem; color: gray;">
+    <div>CURRENT FLAG CHEAT: {{ guessCountries[currentIndex]?.name || 'N/A' }}</div>
+    <div>GUESS COUNTRIES: {{ guessCountries | json }}</div>
+    <div>ALL COUNTRIES: {{ countries | json }}</div>
+  </div>
+
+</main>
