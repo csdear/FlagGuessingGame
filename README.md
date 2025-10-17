@@ -1,5 +1,6 @@
 # FlagGuessingGame
 Angular Flag guessing game.  Cheat mode is currently enabled.  Angular CLI and Node required to run this project 
+<img width="1897" height="789" alt="flagapp" src="https://github.com/user-attachments/assets/6cdb5776-3698-4bf9-9c18-f6a058db063b" />
 
 
 # Flags
