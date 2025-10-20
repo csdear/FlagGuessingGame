@@ -24,17 +24,20 @@ export class FlagsComponent {
   
 
   constructor() {
-    const countryIndexes = new Set<number>();
-    while (countryIndexes.size < SIZE) {
-      countryIndexes.add(this.getRandIndex(COUNTRIES.length));
+    this.guessCountries = this.getRandomCountries(SIZE);
+  }
+
+  private getRandomCountries(count: number): Country[] {
+    const indexes = new Set<number>();
+
+    while (indexes.size < count) {
+      indexes.add(this.getRandIndex(COUNTRIES.length));
     }
 
-    for (const i of countryIndexes) {
-      this.guessCountries.push({
-        ...COUNTRIES[i],
-        code: COUNTRIES[i].code.toLowerCase(),
-      });
-    }
+    return Array.from(indexes).map(i => ({
+      ...COUNTRIES[i],
+      code: COUNTRIES[i].code.toLowerCase(),
+    }));
   }
 
   
