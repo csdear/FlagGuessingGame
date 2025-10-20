@@ -14,12 +14,14 @@ const SIZE = 3;
 export class FlagsComponent {
   countries = COUNTRIES.map(c => ({...c, code: c.code.toLocaleLowerCase()}));
   currentIndex = 0;
+  selectedIndex: number | null = null;
   guessCountries: Country[] = [];
   showAutoComplete = false;
   currentName = '';
   message = '';
   guessCounter = 0;
   gameState = 'start';
+  
 
   constructor() {
     const countryIndexes = new Set<number>();
@@ -35,7 +37,7 @@ export class FlagsComponent {
     }
   }
 
-  selectedIndex: number | null = null;
+  
 
   selectCountry(code: string) {
     this.currentName = this.countries.filter(c => c.code === code)[0].name
